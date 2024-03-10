@@ -1,0 +1,105 @@
+<div style="height: 80px;background-color: white;box-shadow: 0 5px 4px -3px gray;margin-bottom: 5px;">
+    <div style="display: flex;justify-content:space-between;align-items: center;height: 100%;width: 100%;">
+        <div style="height: 100%;width: 100px;">
+            <img src="/assets/images/arb_logo.png" style="width: 100%;height: 100%;" alt="">
+        </div>
+        <div>
+            <div style="margin-right: 12px;">
+                <div mat-button [matMenuTriggerFor]="beforeMenu">
+                     <img src="/assets/images/user.png" style="width: 30px;height: 30px;" alt="">
+                     <span style="font-size: 16px;font-weight: bold;margin:1px 4px 0px 4px;">{{user.fullname}}</span>
+                </div>
+                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                    <button mat-menu-item  (click)="changeSiteLanguage('vi')">Tiếng Việt</button>
+                    <button mat-menu-item  (click)="changeSiteLanguage('en')">English</button>
+                    <button mat-menu-item *ngIf="user.fullname == null && user.fullname == ''" transloco="system.dang_nhap"></button>
+                    <button mat-menu-item *ngIf="user.fullname == null && user.fullname == ''" transloco="system.day_ky"></button>
+                    <a href="./dang_nhap">
+                        <button mat-menu-item transloco="system.dang_xuat"> </button>
+                    </a>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <mat-drawer-container class="example-container" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="over" opened>
+            <div style="border-bottom: 1px solid gray;display: flex;justify-content: center;align-items: center;">
+                <img src="/assets/images/arb_logo_system.png" style="width: 150px;height: 150px;" alt="">
+            </div>
+            <div style="margin-top: 10px;" *ngFor ="let item of listModule">
+                <div style="display: flex;justify-content: space-between;align-items: center;" *ngIf="item.is_controller == true || user.fullname=='administrator'">
+                    <div style="display: flex;justify-content: start;align-items: center;">
+                        <img src="{{item.img}}" style="width: 30px;height: 30px;margin-right: 4px;" alt="">
+                        <h3 style="font-weight: bold;font-size: 16px;color: black;margin-bottom: 0px;">{{item.parrent_title}}</h3>
+                    </div>
+                    <div *ngIf="item.showFiller == showFiller">
+                        <mat-icon (click)="HiddenFiller(false,item.id)">arrow_drop_down</mat-icon>
+                    </div>
+                    <div *ngIf="item.showFiller == !showFiller">
+                        <mat-icon (click)="ShowFiller(true,item.id)">arrow_drop_up</mat-icon>
+                    </div>
+                </div>
+                <div *ngFor ="let item2 of item.listModuleDetails">
+                    <div  (click)="goToModuleCurrent(item2.id,item2.controller)" *ngIf="(showFiller && item2.is_controller == true && item.showFiller == showFiller) || user.fullname=='administrator'" style="margin-left: 12px;display: flex; justify-content: start;align-items: center;margin-top: 4px;">
+                        <img src="{{item2.img}}" style="width: 25px;height: 25px;margin-right: 4px;" alt="">
+                        <h3 style   ="font-size:14px;margin-bottom: 0px;font-weight: 500;">{{item2.title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </mat-drawer>
+
+        
+        <mat-drawer-content style="padding: 0 20px;">
+            <div>
+                <button  style="border: none !important;" (click)="drawer.toggle()">
+                    <mat-icon style="margin-top: 4px;">menu</mat-icon>
+                </button>
+            </div>
+            <div style="width: 100%;margin-top: 8px;">
+                <div *ngIf="idModuleCurrent == 1">
+                    <app-sys-user></app-sys-user>
+                </div>
+                <div *ngIf="idModuleCurrent == 2">
+                    <app_sys_quan_tri></app_sys_quan_tri>
+                </div>
+                <div *ngIf="idModuleCurrent == 11">
+                    <app_sys_don_vi_tinh></app_sys_don_vi_tinh>
+                </div>
+                <div *ngIf="idModuleCurrent == 12">
+                    <app_sys_tien_te></app_sys_tien_te>
+                </div>
+                <div *ngIf="idModuleCurrent == 21">
+                    <app_sys_phong_ban></app_sys_phong_ban>
+                </div>
+                
+                <div *ngIf="idModuleCurrent == 22">
+                    <app_sys_chuc_danh></app_sys_chuc_danh>
+                </div>
+                <div *ngIf="idModuleCurrent == 23">
+                    <app_sys_cong_ty></app_sys_cong_ty>
+                </div>
+                <div *ngIf="idModuleCurrent == 24">
+                    <app_sys_phuc_loi></app_sys_phuc_loi>
+                </div>
+                <div *ngIf="idModuleCurrent == 25">
+                    <app_sys_tuyen_dung></app_sys_tuyen_dung>
+                </div>
+                <div *ngIf="idModuleCurrent == 26">
+                    <app_sys_khoa></app_sys_khoa>
+                </div>
+                <div *ngIf="idModuleCurrent == 41">
+                    <app_sys_nhom_tin_tuc></app_sys_nhom_tin_tuc>
+                </div>
+                <div *ngIf="idModuleCurrent == 42">
+                    <app_sys_loai_tin_tuc></app_sys_loai_tin_tuc>
+                </div>
+                <div *ngIf="idModuleCurrent == 43">
+                    <app_sys_tin_tuc></app_sys_tin_tuc>
+                </div>
+            </div>
+          </mat-drawer-content>
+
+    </mat-drawer-container>
+</div>

@@ -1,0 +1,67 @@
+<div>
+  <div style="height: 60px;background-color: blue;display: flex;align-items: center;margin-bottom: 20px;">
+    <h3 style="font-size: 16px; font-weight: bold;color: white;margin-bottom: 0;margin-left: 16px;">Quản trị</h3>
+  </div>
+
+  <div style="width: 100%;display: flex;">
+    <div class="form-group col-md-12 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+      <cm_input [errorModel]="errorModel" [label]="'system.ten'" [keyError]="'ten'" [actionEnum]="actionEnum"
+        [(model)]="record.ten"></cm_input>
+    </div>
+  </div>
+  <div style="width: 100%;display: flex;">
+    <div class="form-group col-md-12 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+      <cm_input [errorModel]="errorModel" [label]="'system.ghi_chu'" [keyError]="'ghi_chu'" [actionEnum]="actionEnum"
+        [type]="'textarea'" [(model)]="record.ghi_chu"></cm_input>
+    </div>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Thành viên quản trị">
+      <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"
+            [color]="task.color" (change)="setAll($event.checked)">
+            {{task.name}}
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let item of listData">
+              <mat-checkbox [(ngModel)]="item.completed" [color]="task.color" (ngModelChange)="updateAllComplete()">
+                <span class="mt-2"> {{item.name}}</span>
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+      </section>
+    </mat-tab>
+    <mat-tab label="Quyền">
+      <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox class="example-margin" [checked]="allQuyen" [indeterminate]="someQuyen()" [color]="task.color"
+            (change)="setAllQuyen($event.checked)">
+            {{task.name}}
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let item of listQuyen">
+              <mat-checkbox [(ngModel)]="item.completed" [color]="task.color" (ngModelChange)="updateAllQuyen()">
+                <span class="mt-2"> {{item.title}}</span>
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+      </section>
+    </mat-tab>
+  </mat-tab-group>
+  <section style="display: flex;justify-content: end;align-items: center;margin: 20px 12px;">
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" style="margin-right: 8px;" (click)="close()">Đóng</button>
+      <button *ngIf="this.actionEnum == 1" mat-raised-button style="background-color: green;color: white;"
+        (click)="create_new()">Thêm</button>
+      <button *ngIf="this.actionEnum == 2" mat-raised-button style="background-color: green;color: white;"
+        (click)="edit_new()">Sửa</button>
+    </div>
+  </section>
+</div>

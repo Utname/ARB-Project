@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "arb-platform-47e10": {
+      "hosting": {
+        "ARB_PlafromFE": [
+          "arb-platform-47e10"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "arb-platform-47e10"
+  }
+}

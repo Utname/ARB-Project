@@ -1,0 +1,19 @@
+<div style="height: 80px;background-color: white;box-shadow: 0 5px 4px -3px gray;margin-bottom: 5px;">
+    <div style="display: flex;justify-content:space-between;align-items: center;height: 100%;width: 100%;">
+        <div style="height: 100%;width: 100px;">
+            <img src="/assets/images/arb_logo.png" style="width: 100%;height: 100%;" alt="">
+        </div>
+        <div>
+            <div style="margin-right: 12px;">
+                <div mat-button [matMenuTriggerFor]="beforeMenu">
+                     <img src="/assets/images/user.png" style="width: 30px;height: 30px;" alt="">
+                </div>
+                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                    <button mat-menu-item>Đăng nhập</button>
+                    <button mat-menu-item>Đăng kí</button>
+                    <button mat-menu-item>Đăng xuất</button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+</div>

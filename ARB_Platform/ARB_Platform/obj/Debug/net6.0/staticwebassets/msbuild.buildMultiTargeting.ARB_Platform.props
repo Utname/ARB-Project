@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ARB_Platform.props" />
+</Project>

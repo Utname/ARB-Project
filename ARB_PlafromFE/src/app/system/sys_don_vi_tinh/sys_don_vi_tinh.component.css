@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-right: 12px;
+}
+
+.pagination_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.page__number {
+  color: red;
+  cursor: pointer;
+}
+table th{
+  border: white 2px solid;
+}

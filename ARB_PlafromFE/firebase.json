@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "ARB_PlafromFE",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

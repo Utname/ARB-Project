@@ -1,0 +1,42 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1"
+        style="padding: 40px 30px;border-radius: 10px;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset">
+      
+          <h3 class="mb-5 text-center" style="font-weight: bold;font-size: 24px;">Đăng nhập tài khoản</h3>
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example13">Email <span style="color: red;">{{emailCheck}}</span></label>
+            <input type="email"  [(ngModel)]="record.email" (change)="checkError()" class="form-control form-control-lg" />
+          </div>
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example23">Mật khẩu <span style="color: red;">{{passwordCheck}}</span></label>
+            <input type="password"  [(ngModel)]="record.hasPassword" (change)="checkError()" class="form-control form-control-lg" />
+          </div>
+
+          <div class="mb-4" style="display: flex;justify-content: right; align-items: center;">
+            <!-- Checkbox -->
+            <a href="#!">Đăng ký tài khoản</a>
+          </div>
+
+          <!-- Submit button -->
+          <button class="btn btn-primary btn-lg btn-block" (click)="dang_nhap()">Đăng nhập</button>
+
+          <!-- <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+            </div>
+  
+            <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
+              role="button">
+              <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
+            </a>
+            <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
+              role="button">
+              <i class="fab fa-twitter me-2"></i>Continue with Twitter</a> -->
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,118 @@
+<div>
+    <div style="height: 60px;background-color: blue;display: flex;align-items: center;margin-bottom: 20px;">
+        <h3 style="font-size: 16px; font-weight: bold;color: white;margin-bottom: 0;margin-left: 16px;" transloco="system.nguoi_dung"></h3>
+    </div>
+
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.ho_va_ten'"
+            [keyError]="'fullname'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.fullname"></cm_input>
+        </div>
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'Email'"
+            [keyError]="'email'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.email"></cm_input>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;" >
+            <div class="col-md-6 col-12" style="margin-bottom: 0px;">
+                <cm_input [errorModel]="errorModel"
+                        [label]="'Số điện thoại'"
+                        [keyError]="'phone'"
+                        [actionEnum]="actionEnum"
+                        [(model)]="record.phone"></cm_input>
+            </div>
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;">
+                <cm_select 
+                    [errorModel]="errorModel" 
+                    [actionEnum]="actionEnum" 
+                    [label]="'Giới tính'" 
+                    [keyError]="'gender'" 
+                    [listData]="listGender" 
+                    [(model)]="record.gender">
+                </cm_select>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'Ngày sinh'"
+            [keyError]="'birthday'"
+            [type]="'datepicker'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.birthday"></cm_input>
+            <!-- <label>Ngày sinh</label>
+            <input [disabled]="actionEnum == 3" [(ngModel)]="record.birthday" class="form-control"
+                placeholder="Nhập vào đây" type="date" /> -->
+        </div>
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;">
+            <cm_input [errorModel]="errorModel"
+                        [label]="'Mật khẩu'"
+                        [keyError]="'hasPassword'"
+                        [type]="'password'"
+                        [actionEnum]="actionEnum"
+                        [(model)]="record.hasPassword"></cm_input>
+            <!-- <label>Mật khẩu <span style="color: red;">{{passwordCheck}}</span></label>
+            <input [disabled]="actionEnum == 3" [(ngModel)]="record.hasPassword" class="form-control"
+                placeholder="Nhập vào đây" type="password" /> -->
+        </div>
+    </div>
+   
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-sm-12">
+            <cm_input [errorModel]="errorModel"
+                [label]="'Địa chỉ'"
+                [keyError]="'address'"
+                [type]="'textarea'"
+                [actionEnum]="actionEnum"
+                [(model)]="record.address"></cm_input>
+            <!-- <label>Địa chỉ</label>
+            <textarea [disabled]="actionEnum == 3" [(ngModel)]="record.address" class="form-control"
+                placeholder="Nhập vào đây" type="text"></textarea> -->
+        </div>
+    </div>
+    <div style="width: 100%;padding: 8px;">
+        <label style="margin-left: 8px;" transloco="system.avatar"></label>
+        <div class="form-group col-sm-12" 
+        style="width: 100%;min-height: 300px;">
+            <!-- <div style="display: flex; justify-content: space-between; align-items: center;" class="div_hide_file">
+                <label class="my-0">Upload image</label>
+               
+            </div> -->
+            <img [src]="record.avatar" alt="" style="width: 100%;height: 300px;object-fit: contain;border: 1px solid gray;border-radius: 8px;margin-top: 8px;position: relative;">
+            <div style="position: absolute;bottom: 3%;right: 3%;">
+                <img src="/assets/images/camera.png" alt="" style="width: 60px;height: 60px;border-radius: 50%;position: relative;" (change)="uploadPhoto($event)">
+                <input type="file" class="hide_file" style="position: absolute;" (change)="uploadPhoto($event)">
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;padding: 8px;">
+        <label style="margin-left: 8px;" transloco="system.anh_bia"></label>
+        <div class="form-group col-sm-12" 
+        style="width: 100%;min-height: 300px;">
+            <!-- <div style="display: flex; justify-content: space-between; align-items: center;" class="div_hide_file">
+                <label class="my-0">Upload image</label>
+               
+            </div> -->
+            <img [src]="record.cover_image" alt="" style="width: 100%;height: 300px;object-fit: contain;border: 1px solid gray;border-radius: 8px;margin-top: 8px;position: relative;">
+            <div style="position: absolute;bottom: 3%;right: 3%;">
+                <img src="/assets/images/camera.png" alt="" style="width: 60px;height: 60px;border-radius: 50%;position: relative;" (change)="uploadPhoto($event)">
+                <input type="file" class="hide_file" style="position: absolute;" (change)="uploadPhoto($event)">
+            </div>
+        </div>
+    </div>
+    <section style="display: flex;justify-content: end;align-items: center;margin: 20px 12px;">
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" style="margin-right: 8px;" (click)="close()">Đóng</button>
+            <button *ngIf="this.actionEnum == 1" mat-raised-button style="background-color: green;color: white;"
+                (click)="save()" transloco="system.them"></button>
+            <button *ngIf="this.actionEnum == 2" mat-raised-button style="background-color: green;color: white;"
+                (click)="save()" transloco="system.sua"></button>
+        </div>
+    </section>
+</div>

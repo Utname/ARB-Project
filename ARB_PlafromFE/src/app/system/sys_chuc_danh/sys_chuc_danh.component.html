@@ -1,0 +1,88 @@
+<mat-card>
+    <mat-card-content>
+        <mat-card style="padding: 16px;">
+            <h2 style="font-size: 18px;font-weight:bold" transloco="system.quan_ly_chuc_danh"></h2>
+            <div style="width: 100%;display: flex;">
+                <div class="form-group col-md-6 col-sm-12">
+                    <input type="file" style="display: inline-block;" (change)="incomingfile($event)"
+                        placeholder="Upload file" accept=".xlsx">
+                    <button type="button" class="btn btn-info" (click)="Upload()">Upload</button>
+                </div>
+            </div>
+            <div style="width: 100%;" class="d-md-flex">
+                <div class="form-group col-md-6 col-sm-12">
+                    <label>{{'system.tim_kiem' | transloco}} ({{'system.ten' | transloco}} | {{'system.ma' | transloco}}) </label>
+                    <input class="form-control" (change)="loadListData()" [(ngModel)]="filter.search"
+                        placeholder="Nhập tên, mã" type="text" />
+                </div>
+                <div class="form-group col-md-6 col-sm-12">
+                    <label transloco="system.trang_thai_su_dung"></label>
+                    <div class="flex-1">
+                        <mat-select class="form-control" #select [(ngModel)]="filter.status_del"
+                            (selectionChange)="loadListData()">
+                            <mat-option *ngFor="let item of listOptions" [value]="item.id">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+            </div>
+            <section style="display: flex;justify-content: end;align-items: center;margin-right: 12px;">
+                <div class="example-button-row">
+                    <button mat-raised-button style="background-color:rgb(228 144 24);color: white;margin-right: 8px;"
+                        (click)="exportexcel()" transloco="system.xuat_excel"></button>
+                    <button mat-raised-button style="background-color: green;color: white;"
+                        (click)="openDialogAdd()" transloco="system.them"></button>
+                </div>
+            </section>
+        </mat-card>
+        <br>
+        <mat-card style="padding: 16px;">
+            <div style="margin-top: 20px;overflow-y: auto;">
+                <table class="table table-hover" style="overflow-y: auto" id="excel-table">
+                    <thead>
+                        <tr style="background-color: rgb(99, 99, 249);color: white;font-weight: bold;">
+                            <th scope="col"></th>
+                            <th scope="col" transloco="system.stt"></th>
+                            <th scope="col" transloco="system.chuc_danh"></th>
+                            <th scope="col" transloco="system.ghi_chu"></th>
+                            <th scope="col" transloco="system.nguoi_cap_nhat"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="listData.length != 0">
+                        <tr
+                            *ngFor="let item of listData | paginate: { itemsPerPage: itemPerPage, currentPage: p };index as i;">
+                            <td style="width: 50px; vertical-align: middle;" align="center">
+                                <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+                                <mat-menu #menu="matMenu">
+                                    <button (click)="openDialogView(item)" mat-menu-item transloco="system.xem"></button>
+                                    <button mat-menu-item (click)="openDialogEdit(item)" transloco="system.sua"></button>
+                                    <button *ngIf="item.status_del == 1" mat-menu-item
+                                        (click)="Delete(item)" transloco="system.ngung_su_dung"></button>
+                                    <button *ngIf="item.status_del == 2" mat-menu-item
+                                        (click)="convert(item)" transloco="system.su_dung_lai"></button>
+                                </mat-menu>
+                            </td>
+                            <td style="width: 50px; vertical-align: middle;" align="center" scope="row">{{i + 1}}</td>
+                           
+                            <td>
+                                <p style="font-weight:bold;color:blue;margin:0px;">{{item.ma}}</p>
+                                <p *ngIf="item.ten != null" style="margin: 0px;"><span
+                                        style="font-weight: bold;"><span transloco="system.ten"></span>:&nbsp;</span><span>{{item.ten}}</span>
+                                </p>
+                            </td>
+                            <td style=" vertical-align: middle;height: 100%;">{{item.ghi_chu}}</td>
+                            <td style="width: 200px;vertical-align: middle">
+                                <p style="font-weight:bold;color:blue;margin:0px;">{{item.ten_nguoi_cap_nhat}}</p>
+                                <p>{{item.update_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="display: flex;justify-content: center;align-items: center;margin-top: 20px;">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </mat-card>
+    </mat-card-content>
+</mat-card>

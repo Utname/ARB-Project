@@ -1,0 +1,248 @@
+<div>
+    <div style="height: 60px;background-color: blue;display: flex;align-items: center;margin-bottom: 20px;">
+        <h3 style="font-size: 16px; font-weight: bold;color: white;margin-bottom: 0;margin-left: 16px;">Tuyển dụng</h3>
+    </div>
+    <section style="display: flex;justify-content: end;align-items: center;margin: 20px 12px;">
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" style="margin-right: 8px;" (click)="onNoClick()">Đóng</button>
+            <button *ngIf="this.data.actionEnum == 1" mat-raised-button style="background-color: green;color: white;"
+                (click)="create()">Thêm</button>
+            <button *ngIf="this.data.actionEnum == 2" mat-raised-button style="background-color: green;color: white;"
+                (click)="edit()">Sửa</button>
+        </div>
+    </section>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12">
+            <label>Mã <span style="color: red;">{{maCheck}}</span></label>
+            <input [disabled]="data.actionEnum == 3" [(ngModel)]="record.ma" (change)="checkError()"
+                class="form-control" placeholder="Nhập vào đây" type="text" />
+        </div>
+        <div class="form-group col-md-6 col-12">
+            <label>Tên <span style="color: red;">{{tenCheck}}</span></label>
+            <input [disabled]="data.actionEnum == 3" [(ngModel)]="record.ten" class="form-control"
+                (change)="checkError()" placeholder="Nhập vào đây" type="text" />
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12">
+            <label>Tiêu đề</label>
+            <input [disabled]="data.actionEnum == 3" [(ngModel)]="record.titile" (change)="checkError()"
+                class="form-control" placeholder="Nhập vào đây" type="text" />
+        </div>
+        <div class="form-group col-md-6 col-12">
+            <label>Công ty <span style="color: red;">{{congTyCheck}}</span></label>
+            <div class="flex-1">
+                <mat-select (selectionChange)="checkError()" [disabled]="data.actionEnum == 3" class="form-control" #select
+                    [(ngModel)]="record.id_cong_ty">
+                    <mat-option *ngFor="let item of list_cong_ty" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12">
+            <label>Phòng ban <span style="color: red;">{{phongBanCheck}}</span></label>
+            <div class="flex-1">
+                <mat-select (selectionChange)="checkError()" [disabled]="data.actionEnum == 3" class="form-control" #select
+                    [(ngModel)]="record.id_phong_ban">
+                    <mat-option *ngFor="let item of list_phong_ban" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="form-group col-md-6 col-12">
+            <label>Vi trí tuyên dụng <span style="color: red;">{{chucDanhCheck}}</span></label>
+            <div class="flex-1">
+                <mat-select (selectionChange)="checkError()" multiple [disabled]="data.actionEnum == 3" class="form-control"
+                    #select [(ngModel)]="record.id_chuc_danh">
+                    <mat-option *ngFor="let item of list_chuc_danh" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+    </div>
+
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12">
+            <label>Hình thức làm việc</label>
+            <div class="flex-1">
+                <mat-select multiple [disabled]="data.actionEnum == 3" class="form-control" #select
+                    [(ngModel)]="record.id_hinh_thuc_lam_viec">
+                    <mat-option *ngFor="let item of list_hinh_thuc_lam_viec" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="form-group col-md-6 col-12">
+            <label>Bằng cấp</label>
+            <div class="flex-1">
+                <mat-select multiple [disabled]="data.actionEnum == 3" class="form-control" #select
+                    [(ngModel)]="record.id_bang_cap">
+                    <mat-option *ngFor="let item of list_bang_cap" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12">
+            <label>Số lượng <span style="color: red;">{{soluongCheck}}</span></label>
+            <input [disabled]="data.actionEnum == 3" [(ngModel)]="record.so_luong" class="form-control"
+                placeholder="Nhập vào đây" type="number" />
+        </div>
+        <div class="form-group col-md-6 col-12">
+            <label>Loại lương <span style="color: red;">{{loaiLuongCheck}}</span></label>
+            <div class="flex-1">
+                <mat-select (selectionChange)="checkError()" [disabled]="data.actionEnum == 3" class="form-control" #select
+                    [(ngModel)]="record.id_loai_luong">
+                    <mat-option *ngFor="let item of list_loai_luong" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;" *ngIf="record.id_loai_luong == 2">
+        <div class="form-group col-md-6 col-12">
+            <label>Mức lương</label>
+            <input [disabled]="data.actionEnum == 3" [(ngModel)]="record.luong_from" class="form-control"
+                placeholder="Nhập vào đây" type="number" />
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;" *ngIf="record.id_loai_luong == 3">
+        <div class="form-group col-md-6 col-12">
+            <label>Lương từ</label>
+            <input [disabled]="data.actionEnum == 3" [(ngModel)]="record.luong_from" class="form-control"
+                placeholder="Nhập vào đây" type="number" />
+        </div>
+        <div class="form-group col-md-6 col-12">
+            <label>Đến</label>
+            <input [disabled]="data.actionEnum == 3" [(ngModel)]="record.luong_to" class="form-control"
+                placeholder="Nhập vào đây" type="number" />
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12">
+            <label>Đơn vị tính</label>
+            <div class="flex-1">
+                <mat-select [disabled]="data.actionEnum == 3" class="form-control" #select
+                    [(ngModel)]="record.id_don_vi_tinh">
+                    <mat-option *ngFor="let item of list_don_vi_tinh" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="form-group col-md-6 col-12">
+            <label>Giới tính</label>
+            <div class="flex-1">
+                <mat-select multiple="" [disabled]="data.actionEnum == 3" class="form-control" #select
+                    [(ngModel)]="record.id_gioi_tinh">
+                    <mat-option *ngFor="let item of list_gioi_tinh" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12">
+            <label>Phúc lợi</label>
+            <div class="flex-1">
+                <mat-select multiple="" [disabled]="data.actionEnum == 3" class="form-control" #select
+                    [(ngModel)]="record.id_phuc_loi">
+                    <mat-option *ngFor="let item of list_phuc_loi" [value]="item.id">
+                        {{item.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+       
+    </div>
+    <div style="width: 100%;display: flex;">
+       
+        <div class="form-group col-md-6 col-12">
+           <div>
+            <label>Ngày tuyển dụng <span style="color: red;">{{ngayBatDauCheck}}</span></label>
+           </div>
+            <mat-form-field class="example-full-width" style="width: 100%; background-color: white !important;">
+                <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker"
+                (change)="checkError()" [disabled]="data.actionEnum == 3" [(ngModel)]="record.ngay_bat_dau">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <!-- <div class="form-group col-md-6 col-12">
+            <label>Ngày tuyển dụng <span style="color: red;">{{ngayBatDauCheck}}</span></label>
+            <input (change)="checkError()" [disabled]="data.actionEnum == 3" [(ngModel)]="record.ngay_bat_dau"
+                class="form-control" placeholder="Nhập vào đây" type="date" />
+        </div> -->
+        <div class="form-group col-md-6 col-12">
+            <label>Ngày hết hạn <span style="color: red;">{{ngayHetHanCheck}}</span></label>
+            <mat-form-field class="example-full-width" style="width: 100%; background-color: white !important;">
+                <input matInput [matDatepickerFilter]="myFilter1" [matDatepicker]="picker1"
+                (change)="checkError()" [disabled]="data.actionEnum == 3" [(ngModel)]="record.ngay_het_han">
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+    </div>
+    <!-- <div style="width: 100%;display: flex;">
+        <div class="form-group col-sm-12">
+            <label>Mô tả công việc</label>
+            <textarea [disabled]="data.actionEnum == 3" [(ngModel)]="record.mo_ta" class="form-control"
+                placeholder="Nhập vào đây" type="text"></textarea>
+        </div>
+    </div> -->
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-sm-12">
+            <label>Mô tả công việc</label>
+            <angular-editor [disabled]="data.actionEnum == 3" [config]="config" [(ngModel)]="record.mo_ta"></angular-editor>
+         
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-sm-12">
+            <label>Mô tả công ty</label>
+            <angular-editor [disabled]="data.actionEnum == 3" [config]="config" [(ngModel)]="record.mo_ta_cong_ty"></angular-editor>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-sm-12">
+            <label>Yêu cầu</label>
+            <angular-editor [disabled]="data.actionEnum == 3" [config]="config" [(ngModel)]="record.yeu_cau"></angular-editor>
+        </div>
+    </div>
+   
+    <div style="width: 100%;padding: 8px;">
+        <label style="margin-left: 8px;">Hình ảnh</label>
+        <div class="form-group col-sm-12" 
+        style="width: 100%;min-height: 300px;">
+            <!-- <div style="display: flex; justify-content: space-between; align-items: center;" class="div_hide_file">
+                <label class="my-0">Upload image</label>
+               
+            </div> -->
+            <img [src]="record.image" alt="" style="width: 100%;height: 300px;object-fit: contain;border: 1px solid gray;border-radius: 8px;margin-top: 8px;position: relative;">
+            <div style="position: absolute;bottom: 3%;right: 3%;">
+                <img src="/assets/images/camera.png" alt="" style="width: 60px;height: 60px;border-radius: 50%;position: relative;" (change)="uploadPhoto($event)">
+                <input type="file" class="hide_file" style="position: absolute;" (change)="uploadPhoto($event)">
+            </div>
+        </div>
+    </div>
+    <section style="display: flex;justify-content: end;align-items: center;margin: 20px 12px;">
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" style="margin-right: 8px;" (click)="onNoClick()">Đóng</button>
+            <button *ngIf="this.data.actionEnum == 1" mat-raised-button style="background-color: green;color: white;"
+                (click)="create()">Thêm</button>
+            <button *ngIf="this.data.actionEnum == 2" mat-raised-button style="background-color: green;color: white;"
+                (click)="edit()">Sửa</button>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,96 @@
+<div>
+    <div style="height: 60px;background-color: blue;display: flex;align-items: center;margin-bottom: 20px;">
+        <h3 style="font-size: 16px; font-weight: bold;color: white;margin-bottom: 0;margin-left: 16px;">Công ty</h3>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.ma'"
+            [keyError]="'ma_cong_ty'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.ma"></cm_input>
+        </div>
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.ten'"
+            [keyError]="'ten'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.ten"></cm_input>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.email'"
+            [keyError]="'email'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.email"></cm_input>
+        </div>
+
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.so_dien_thoai'"
+            [keyError]="'phone'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.phone"></cm_input>
+        </div>
+    </div>
+    
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.dia_chi'"
+            [keyError]="'address'"
+            [actionEnum]="actionEnum"
+            [type]="'textarea'"
+            [(model)]="record.address"></cm_input>
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-sm-12">
+            <label>Mô tả</label>
+            <angular-editor [disabled]="actionEnum == 3" [config]="config" [(ngModel)]="record.mo_ta"></angular-editor>
+        </div>
+    </div>
+    <div style="width: 100%;padding: 8px;">
+        <label style="margin-left: 8px;">Logo</label>
+        <div class="form-group col-sm-12" 
+        style="width: 100%;min-height: 300px;">
+            <!-- <div style="display: flex; justify-content: space-between; align-items: center;" class="div_hide_file">
+                <label class="my-0">Upload image</label>
+               
+            </div> -->
+            <img [src]="record.logo" alt="" style="width: 100%;height: 300px;object-fit: contain;border: 1px solid gray;border-radius: 8px;margin-top: 8px;position: relative;">
+            <div style="position: absolute;bottom: 3%;right: 3%;">
+                <img src="/assets/images/camera.png" alt="" style="width: 60px;height: 60px;border-radius: 50%;position: relative;" (change)="uploadPhoto($event)">
+                <input type="file" class="hide_file" style="position: absolute;" (change)="uploadPhoto($event)">
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;padding: 8px;">
+        <label style="margin-left: 8px;">Ảnh bìa</label>
+        <div class="form-group col-sm-12" 
+        style="width: 100%;min-height: 300px;">
+            <!-- <div style="display: flex; justify-content: space-between; align-items: center;" class="div_hide_file">
+                <label class="my-0">Upload image</label>
+               
+            </div> -->
+            <img [src]="record.cover_image" alt="" style="width: 100%;height: 300px;object-fit: contain;border: 1px solid gray;border-radius: 8px;margin-top: 8px;position: relative;">
+            <div style="position: absolute;bottom: 3%;right: 3%;">
+                <img src="/assets/images/camera.png" alt="" style="width: 60px;height: 60px;border-radius: 50%;position: relative;" (change)="uploadPhoto($event)">
+                <input type="file" class="hide_file" style="position: absolute;" (change)="uploadPhoto($event)">
+            </div>
+        </div>
+    </div>
+    
+   
+    <section style="display: flex;justify-content: end;align-items: center;margin: 20px 12px;">
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" style="margin-right: 8px;" (click)="close()">Đóng</button>
+            <button *ngIf="this.actionEnum == 1" mat-raised-button style="background-color: green;color: white;"
+                (click)="save()">Thêm</button>
+            <button *ngIf="this.actionEnum == 2" mat-raised-button style="background-color: green;color: white;"
+                (click)="save()">Sửa</button>
+        </div>
+    </section>
+</div>

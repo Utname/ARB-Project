@@ -1,0 +1,54 @@
+<div>
+    <div style="height: 60px;background-color: blue;display: flex;align-items: center;margin-bottom: 20px;">
+        <h3 style="font-size: 16px; font-weight: bold;color: white;margin-bottom: 0;margin-left: 16px;" transloco="system.nhom_tin_tuc"></h3>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.ma'"
+            [keyError]="'ma'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.ma"></cm_input>
+        </div>
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.ten'"
+            [keyError]="'ten'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.ten"></cm_input>
+        </div>
+
+
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.stt'"
+            [keyError]="'stt'"
+            [actionEnum]="actionEnum"
+            [(model)]="record.stt"></cm_input>
+        </div>
+        <div class="form-group col-md-6 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+        </div>
+    </div>
+    <div style="width: 100%;display: flex;">
+        <div class="form-group col-md-12 col-12" style="margin-bottom: 0px;margin-top: 0px;">
+            <cm_input [errorModel]="errorModel"
+            [label]="'system.ghi_chu'"
+            [keyError]="'ghi_chu'"
+            [actionEnum]="actionEnum"
+            [type]="'textarea'"
+            [(model)]="record.ghi_chu"></cm_input>
+        </div>
+    </div>
+    
+    <section style="display: flex;justify-content: end;align-items: center;margin: 20px 12px;">
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" style="margin-right: 8px;" (click)="close()" transloco="system.dong"></button>
+            <button *ngIf="this.actionEnum == 1" mat-raised-button style="background-color: green;color: white;"
+                (click)="save()" transloco="system.them"></button>
+            <button *ngIf="this.actionEnum == 2" mat-raised-button style="background-color: green;color: white;"
+                (click)="save()" transloco="system.sua"></button>
+        </div>
+    </section>
+</div>
